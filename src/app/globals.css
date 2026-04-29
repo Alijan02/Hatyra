@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 42 40% 96%;
+  --foreground: 30 18% 16%;
+  --primary: 145 18% 28%;
+  --accent: 35 45% 52%;
+  --muted: 38 25% 90%;
+  --border: 38 18% 78%;
+  --card: 0 0% 100%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.section {
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.container-x {
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+@media (min-width: 640px) { .container-x { padding-left: 2rem; padding-right: 2rem; } }
+
+.eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: hsl(var(--accent));
+  font-weight: 500;
+}
+
+.section-divider {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+/* Тонкий восточный узор как фоновый паттерн */
+.pattern-dots {
+  background-image: radial-gradient(hsl(var(--accent) / 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.pattern-grid {
+  background-image:
+    linear-gradient(hsl(var(--foreground) / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--foreground) / 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Орнаментальная сетка ромбов */
+.pattern-diamonds {
+  background-color: transparent;
+  background-image:
+    linear-gradient(45deg, hsl(var(--accent) / 0.08) 25%, transparent 25%),
+    linear-gradient(-45deg, hsl(var(--accent) / 0.08) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, hsl(var(--accent) / 0.08) 75%),
+    linear-gradient(-45deg, transparent 75%, hsl(var(--accent) / 0.08) 75%);
+  background-size: 28px 28px;
+  background-position: 0 0, 0 14px, 14px -14px, -14px 0px;
+}
+
+/* Тёмный наложенный градиент для изображений-героев */
+.image-overlay-dark {
+  background: linear-gradient(
+    180deg,
+    hsl(30 18% 16% / 0.6) 0%,
+    hsl(30 18% 16% / 0.45) 30%,
+    hsl(30 18% 16% / 0.7) 100%
+  );
+}
+
+.image-overlay-warm {
+  background: linear-gradient(
+    180deg,
+    hsl(30 18% 16% / 0.3) 0%,
+    hsl(30 18% 16% / 0.5) 60%,
+    hsl(30 18% 16% / 0.85) 100%
+  );
+}
+
+/* Плавное появление при скролле */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-up {
+  animation: fade-up 0.6s ease-out backwards;
+}
+
+/* Лёгкая тень для карточек поверх изображений */
+.card-shadow {
+  box-shadow:
+    0 1px 2px hsl(30 18% 16% / 0.04),
+    0 4px 16px hsl(30 18% 16% / 0.06);
+}
+
+/* Skip-link для клавиатурной навигации — невидим, пока не получит focus.
+   WCAG: пользователь Tab-ом сразу пропускает шапку и переходит к контенту. */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0.5rem;
+  z-index: 100;
+  padding: 0.625rem 1rem;
+  background: hsl(var(--primary));
+  color: hsl(var(--background));
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0.5rem;
+  outline: 2px solid hsl(var(--accent));
+  outline-offset: 2px;
+}
+
+/* Уважаем prefers-reduced-motion — для пользователей с вестибулярными
+   проблемами или просто предпочтениями. Все наши декоративные анимации
+   (fade-up, animate-bounce, animate-ping, recovery-slide) выключаются. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Touch-target: минимум 44×44 px для интерактивных элементов на мобильных
+   (WCAG 2.2 AA). Применяется автоматически на узких экранах. */
+@media (max-width: 640px) {
+  button,
+  [role="button"],
+  a[href],
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px;
+  }
+}
