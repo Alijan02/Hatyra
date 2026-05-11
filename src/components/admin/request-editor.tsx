@@ -139,7 +139,13 @@ export function RequestEditor({ item }: { item: ServiceRequest }) {
 
             <Field label="Кладбище / Город">{item.cemetery}</Field>
             <Field label="Язык">
-              {item.locale === "ru" ? "Русский" : "English"}
+              {item.locale === "ru"
+                ? "Русский"
+                : item.locale === "tk"
+                ? "Türkmençe"
+                : item.locale === "tr"
+                ? "Türkçe"
+                : "English"}
             </Field>
           </dl>
 

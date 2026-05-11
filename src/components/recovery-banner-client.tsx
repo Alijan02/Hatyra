@@ -44,6 +44,32 @@ const T = {
     dismiss: "Hide",
     seeAll: "All my requests",
   },
+  tk: {
+    single: "Sizde aktiw sargyt bar",
+    multipleN: (n: number) => `${n} aktiw sargyt`,
+    statusLabels: {
+      new: "Kabul edildi",
+      in_progress: "Işde",
+      done: "Ýerine ýetirildi",
+      cancelled: "Ýatyryldy",
+    } as Record<RequestStatus, string>,
+    open: "Açmak",
+    dismiss: "Gizlemek",
+    seeAll: "Ähli sargytlarym",
+  },
+  tr: {
+    single: "Aktif bir talebiniz var",
+    multipleN: (n: number) => `${n} aktif talep`,
+    statusLabels: {
+      new: "Alındı",
+      in_progress: "İşlemde",
+      done: "Tamamlandı",
+      cancelled: "İptal edildi",
+    } as Record<RequestStatus, string>,
+    open: "Aç",
+    dismiss: "Gizle",
+    seeAll: "Tüm taleplerim",
+  },
 };
 
 const DISMISS_KEY = "hatyra-banner-dismissed";
@@ -53,7 +79,7 @@ export function RecoveryBannerClient({
   locale,
 }: {
   items: RecoveryItem[];
-  locale: "ru" | "en";
+  locale: "ru" | "en" | "tk" | "tr";
 }) {
   const [mounted, setMounted] = useState(false);
   const [dismissed, setDismissed] = useState(false);

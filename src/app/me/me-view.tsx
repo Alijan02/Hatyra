@@ -14,12 +14,20 @@ const STATUS_DOT = {
   cancelled: "bg-zinc-400",
 } as const;
 
+function localeToBcp47(locale: string): string {
+  if (locale === "en") return "en-US";
+  if (locale === "tk") return "tk-TM";
+  if (locale === "tr") return "tr-TR";
+  return "ru-RU";
+}
+
 function formatDate(iso: string, locale: string): string {
   try {
-    return new Date(iso).toLocaleDateString(
-      locale === "en" ? "en-US" : "ru-RU",
-      { day: "2-digit", month: "long", year: "numeric" },
-    );
+    return new Date(iso).toLocaleDateString(localeToBcp47(locale), {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
   } catch {
     return iso;
   }
@@ -224,23 +232,44 @@ function RequestRow({
   );
 }
 
+const EMPTY_TEXTS: Record<
+  string,
+  { title: string; text: string; cta: string }
+> = {
+  ru: {
+    title: "Заявок пока нет",
+    text: "Когда вы отправите заявку с главной страницы, она появится здесь.",
+    cta: "Отправить заявку",
+  },
+  en: {
+    title: "No requests yet",
+    text: "When you submit a request from the main page, it will appear here.",
+    cta: "Submit a request",
+  },
+  tk: {
+    title: "Sargyt entek ýok",
+    text: "Esasy sahypadan sargyt iberseňiz, ol şu ýerde peýda bolar.",
+    cta: "Sargyt ibermek",
+  },
+  tr: {
+    title: "Henüz talep yok",
+    text: "Ana sayfadan bir talep gönderdiğinizde burada görünecektir.",
+    cta: "Talep gönder",
+  },
+};
+
 function EmptyState({ locale }: { locale: string }) {
+  const t = EMPTY_TEXTS[locale] ?? EMPTY_TEXTS.ru;
   return (
     <div className="bg-card rounded-3xl border border-border p-10 sm:p-14 text-center">
       <div className="text-5xl mb-5 opacity-30">🕯️</div>
-      <h3 className="text-xl text-foreground mb-2">
-        {locale === "en" ? "No requests yet" : "Заявок пока нет"}
-      </h3>
-      <p className="text-foreground/60 mb-6">
-        {locale === "en"
-          ? "When you submit a request from the main page, it will appear here."
-          : "Когда вы отправите заявку с главной страницы, она появится здесь."}
-      </p>
+      <h3 className="text-xl text-foreground mb-2">{t.title}</h3>
+      <p className="text-foreground/60 mb-6">{t.text}</p>
       <Link
         href="/#contact"
         className="inline-flex items-center px-6 py-3 rounded-full bg-primary text-background hover:bg-primary/90 transition-colors text-sm font-medium"
       >
-        {locale === "en" ? "Submit a request" : "Отправить заявку"}
+        {t.cta}
       </Link>
     </div>
   );

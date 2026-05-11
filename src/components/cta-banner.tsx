@@ -7,18 +7,29 @@ import { images } from "@/lib/images";
 export function CtaBanner() {
   const { locale, t } = useI18n();
 
-  const content =
-    locale === "ru"
-      ? {
-          eyebrow: "Готовы помочь",
-          title: "Расскажите о вашей ситуации",
-          text: "Свяжитесь с нами любым удобным способом. Свяжемся в течение 24 часов, проконсультируем бесплатно.",
-        }
-      : {
-          eyebrow: "Ready to help",
-          title: "Tell us about your situation",
-          text: "Reach out any way that's convenient. We'll get back within 24 hours — free consultation.",
-        };
+  const VARIANTS = {
+    ru: {
+      eyebrow: "Готовы помочь",
+      title: "Расскажите о вашей ситуации",
+      text: "Свяжитесь с нами любым удобным способом. Свяжемся в течение 24 часов, проконсультируем бесплатно.",
+    },
+    en: {
+      eyebrow: "Ready to help",
+      title: "Tell us about your situation",
+      text: "Reach out any way that's convenient. We'll get back within 24 hours — free consultation.",
+    },
+    tk: {
+      eyebrow: "Kömek etmäge taýýar",
+      title: "Ýagdaýyňyzy aýdyň",
+      text: "Islendik amatly usulda habarlaşyň. 24 sagadyň içinde jogap bererarys, mugt geňeş bereris.",
+    },
+    tr: {
+      eyebrow: "Yardıma hazırız",
+      title: "Durumunuzu anlatın",
+      text: "Size uygun herhangi bir yolla iletişime geçin. 24 saat içinde dönüş yaparız, ücretsiz danışmanlık veririz.",
+    },
+  };
+  const content = VARIANTS[locale] ?? VARIANTS.ru;
 
   return (
     <section className="relative overflow-hidden">

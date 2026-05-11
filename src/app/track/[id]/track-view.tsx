@@ -51,9 +51,16 @@ const STATUS_TONE: Record<
   },
 };
 
+function localeToBcp47(locale: string): string {
+  if (locale === "en") return "en-US";
+  if (locale === "tk") return "tk-TM";
+  if (locale === "tr") return "tr-TR";
+  return "ru-RU";
+}
+
 function formatDate(iso: string, locale: string): string {
   try {
-    return new Date(iso).toLocaleString(locale === "en" ? "en-US" : "ru-RU", {
+    return new Date(iso).toLocaleString(localeToBcp47(locale), {
       day: "2-digit",
       month: "long",
       year: "numeric",

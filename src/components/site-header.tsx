@@ -60,6 +60,26 @@ export function SiteHeader({ isLoggedIn = false }: { isLoggedIn?: boolean }) {
         <div className="flex items-center gap-3 sm:gap-4">
           <div className="flex items-center text-xs">
             <button
+              onClick={() => setLocale("tk")}
+              className={`px-2 py-1 rounded transition-colors ${
+                locale === "tk" ? langActive : langIdle
+              }`}
+              aria-label="Türkmençe"
+            >
+              TK
+            </button>
+            <span className={dark ? "text-white/30" : "text-foreground/30"}>|</span>
+            <button
+              onClick={() => setLocale("tr")}
+              className={`px-2 py-1 rounded transition-colors ${
+                locale === "tr" ? langActive : langIdle
+              }`}
+              aria-label="Türkçe"
+            >
+              TR
+            </button>
+            <span className={dark ? "text-white/30" : "text-foreground/30"}>|</span>
+            <button
               onClick={() => setLocale("ru")}
               className={`px-2 py-1 rounded transition-colors ${
                 locale === "ru" ? langActive : langIdle

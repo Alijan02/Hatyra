@@ -16,8 +16,10 @@ const STORAGE_KEY = "hatyra-locale";
 function detectInitialLocale(): Locale {
   if (typeof window === "undefined") return "ru";
   const saved = window.localStorage.getItem(STORAGE_KEY);
-  if (saved === "ru" || saved === "en") return saved;
+  if (saved === "ru" || saved === "en" || saved === "tk" || saved === "tr") return saved;
   const lang = navigator.language?.toLowerCase() ?? "";
+  if (lang.startsWith("tr")) return "tr";
+  if (lang.startsWith("tk")) return "tk";
   if (lang.startsWith("ru")) return "ru";
   return "en";
 }

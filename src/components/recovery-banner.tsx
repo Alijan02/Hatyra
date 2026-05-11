@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { getRequest, type ServiceRequest } from "@/lib/storage";
+import type { Locale } from "@/lib/content";
 import { RecoveryBannerClient, type RecoveryItem } from "./recovery-banner-client";
 
 const TRACKS_COOKIE = "hatyra-tracks";
@@ -35,7 +36,11 @@ export async function RecoveryBanner() {
     cemetery: i.cemetery,
   }));
 
-  const locale = items[0].locale === "en" ? "en" : "ru";
+  const rawLocale = items[0].locale;
+  const locale: Locale =
+    rawLocale === "en" || rawLocale === "tk" || rawLocale === "tr"
+      ? rawLocale
+      : "ru";
 
   return <RecoveryBannerClient items={recoveryItems} locale={locale} />;
 }

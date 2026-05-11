@@ -23,7 +23,10 @@ export function AdminShell({
       <header className="bg-card border-b border-border sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            <Link href="/admin" className="font-display text-2xl text-foreground">
+            <Link
+              href="/admin"
+              className="font-display text-2xl text-foreground"
+            >
               Hatyra
             </Link>
             <span className="text-xs uppercase tracking-widest text-foreground/50 hidden sm:inline">

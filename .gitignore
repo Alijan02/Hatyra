@@ -5,3 +5,9 @@ node_modules
 *.log
 .vercel
 next-env.d.ts
+
+# Локальные настройки Claude Code и установленный UI/UX Pro Max skill —
+# это инструменты для разработки, не часть приложения.
+.claude/
+*.pyc
+__pycache__/

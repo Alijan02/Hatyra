@@ -6,48 +6,32 @@ import { images } from "@/lib/images";
 export function TrustStrip() {
   const { locale } = useI18n();
 
-  const items =
-    locale === "ru"
-      ? [
-          {
-            image: images.trust[0],
-            stat: "100%",
-            title: "Прозрачность",
-            text: "Фото и видео-отчёт по каждой работе. Показываем «до» и «после».",
-          },
-          {
-            image: images.trust[1],
-            stat: "0₽",
-            title: "Предоплаты",
-            text: "Платите только после того, как увидите результат и одобрите его.",
-          },
-          {
-            image: images.trust[2],
-            stat: "24ч",
-            title: "Ответ на заявку",
-            text: "Связываемся с вами в течение суток. Пишите в любое время.",
-          },
-        ]
-      : [
-          {
-            image: images.trust[0],
-            stat: "100%",
-            title: "Transparency",
-            text: "Photo and video report for every job. We show before and after.",
-          },
-          {
-            image: images.trust[1],
-            stat: "$0",
-            title: "Prepayment",
-            text: "Pay only after you've seen the result and approved it.",
-          },
-          {
-            image: images.trust[2],
-            stat: "24h",
-            title: "Response time",
-            text: "We get back to you within a day. Message us anytime.",
-          },
-        ];
+  const VARIANTS = {
+    ru: [
+      { stat: "100%", title: "Прозрачность", text: "Фото и видео-отчёт по каждой работе. Показываем «до» и «после»." },
+      { stat: "0₽", title: "Предоплаты", text: "Платите только после того, как увидите результат и одобрите его." },
+      { stat: "24ч", title: "Ответ на заявку", text: "Связываемся с вами в течение суток. Пишите в любое время." },
+    ],
+    en: [
+      { stat: "100%", title: "Transparency", text: "Photo and video report for every job. We show before and after." },
+      { stat: "$0", title: "Prepayment", text: "Pay only after you've seen the result and approved it." },
+      { stat: "24h", title: "Response time", text: "We get back to you within a day. Message us anytime." },
+    ],
+    tk: [
+      { stat: "100%", title: "Açyklyk", text: "Her iş üçin surat we wideo hasabaty. «Öň» we «soň» görkezýäris." },
+      { stat: "0₼", title: "Öňünden töleg ýok", text: "Netijäni görüp tassyklanyňyzdan soň tölärsiňiz." },
+      { stat: "24s", title: "Jogap wagty", text: "Bir gün içinde habarlaşýarys. Islendik wagtda ýazyň." },
+    ],
+    tr: [
+      { stat: "100%", title: "Şeffaflık", text: "Her iş için fotoğraf ve video raporu. «Önce» ve «sonra» gösteriyoruz." },
+      { stat: "0₺", title: "Ön ödeme yok", text: "Sadece sonucu görüp onayladıktan sonra ödeme yaparsınız." },
+      { stat: "24s", title: "Yanıt süresi", text: "24 saat içinde dönüş yaparız. İstediğiniz zaman yazın." },
+    ],
+  };
+  const items = (VARIANTS[locale] ?? VARIANTS.ru).map((v, i) => ({
+    ...v,
+    image: images.trust[i],
+  }));
 
   return (
     <section className="relative -mt-px bg-foreground text-background overflow-hidden">
